@@ -4,6 +4,10 @@ import java.util.List;
 
 public class DealsManager {
 
+    public List<String> getDeals() {
+        return deals;
+    }
+
     private final List<String> deals;
 
     public void printDeals() {
@@ -18,12 +22,13 @@ public class DealsManager {
     }
 
     public void printMenu() {
-        String menu =   "0. Выход из программы\n" +
-                        "1. Добавить дело\n" +
-                        "2. Показать дела\n" +
-                        "3. Удалить дело по номеру\n" +
-                        "4. Удалить дело по названию\n" +
-                        "5. Удалить дело по ключевому слову";
+        String menu = """
+                0. Выход из программы
+                1. Добавить дело
+                2. Показать дела
+                3. Удалить дело по номеру
+                4. Удалить дело по названию
+                5. Удалить дело по ключевому слову""";
 
         System.out.println(menu);
     }
@@ -34,15 +39,19 @@ public class DealsManager {
     }
 
     public void addDeal(String deal) {
-        deals.add(deal);
-        System.out.println("Добавлена задача: " + deal);
+        if (deal != null && !deal.isEmpty()) {
+            deals.add(deal);
+            System.out.println("Добавлена задача: " + deal);
+        } else {
+            System.out.println("Ошибка! Задача не может быть пустой!");
+        }
     }
 
 
     public void removeDealByIndex(int index) {
         if (index > 0 && index <= deals.size()) {
             String removedDeal = deals.get(index - 1);
-            deals.remove(index-1);
+            deals.remove(index - 1);
             System.out.println("Удалена задача № " + index + ": " + removedDeal);
         } else {
             System.out.println("Ошибка: задачи с таким номером нет.");
@@ -66,7 +75,7 @@ public class DealsManager {
         while (iterator.hasNext()) {
             String currentDeal = iterator.next();
 
-            if (currentDeal.toLowerCase().contains(keyword)) {
+            if (currentDeal.toLowerCase().contains(keyword.toLowerCase())) {
                 iterator.remove();
                 count++;
             }
