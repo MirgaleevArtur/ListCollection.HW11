@@ -24,7 +24,7 @@ public class TestDealsManagerClass {
 
     @Test
     @DisplayName("Успешное добавление задачи")
-    public void add_deals_success() {
+    public void shouldContainBothDeals_whenTwoDealsAdded() {
         dealsManager.addDeal(dealFirst);
         dealsManager.addDeal(dealSecond);
 
@@ -35,7 +35,7 @@ public class TestDealsManagerClass {
 
     @Test
     @DisplayName("Добавление пустой задачи")
-    public void add_empty_deal() {
+    public void shouldRemainEmpty_whenEmptyOrNullDealAdded() {
         dealsManager.addDeal("");
         dealsManager.addDeal(null);
         assertThat(deals, empty());
@@ -43,7 +43,7 @@ public class TestDealsManagerClass {
 
     @Test
     @DisplayName("Удаление задачи по индексу")
-    public void removing_deal_by_index() {
+    public void shouldRemoveFirstDeal_whenRemoveByFirstIndex() {
         dealsManager.addDeal(dealFirst);
         dealsManager.addDeal(dealSecond);
 
@@ -56,7 +56,7 @@ public class TestDealsManagerClass {
 
     @Test
     @DisplayName("Удаление задачи с невалидным индексом")
-    public void removing_deal_by_invalid_index() {
+    public void shouldNotChangeList_whenInvalidIndexProvided() {
         dealsManager.addDeal(dealFirst);
         dealsManager.addDeal(dealSecond);
 
@@ -70,7 +70,7 @@ public class TestDealsManagerClass {
 
     @Test
     @DisplayName("Удаление задачи по названию")
-    public void removing_deal_by_name() {
+    public void shouldRemoveMatchingDeal_whenRemoveByName() {
         dealsManager.addDeal(dealFirst);
         dealsManager.addDeal(dealSecond);
 
@@ -82,7 +82,7 @@ public class TestDealsManagerClass {
 
     @Test
     @DisplayName("Удаление задачи по несуществующему названию")
-    public void removing_deal_by_invalid_name() {
+    public void shouldNotChangeList_whenRemoveByInvalidName() {
         dealsManager.addDeal(dealFirst);
         dealsManager.addDeal(dealSecond);
         assertEquals(2, dealsManager.getDeals().size());
@@ -93,7 +93,7 @@ public class TestDealsManagerClass {
 
     @Test
     @DisplayName("Удаление задачи по ключевому слову")
-    public void removing_deal_by_keyword() {
+    public void shouldBeEmpty_whenMatchingKeywordRemoved() {
         dealsManager.addDeal(dealFirst);
         dealsManager.removeByKeyword("Купить");
 
@@ -103,7 +103,7 @@ public class TestDealsManagerClass {
 
     @Test
     @DisplayName("Удаление задачи по не существующему ключевому слову")
-    public void removing_deal_by_invalid_keyword() {
+    public void shouldNotChangeList_whenRemovingByNotExistingKeyWord() {
         dealsManager.addDeal(dealFirst);
         dealsManager.removeByKeyword("Продать");
 
